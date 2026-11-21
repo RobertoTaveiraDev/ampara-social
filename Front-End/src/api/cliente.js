@@ -22,12 +22,8 @@ export async function requisitar(caminho, { metodo = 'GET', corpo } = {}) {
   })
 
   if (resposta.status === 401 && token) {
-    sessionStorage.removeItem('token')
+    sessionStorage.clear()
     window.location.assign('/login')
-  }
-
-  if (resposta.status === 403) {
-    window.location.assign('/acesso-negado')
   }
 
   const conteudo = await resposta.json()

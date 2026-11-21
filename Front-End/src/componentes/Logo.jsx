@@ -1,4 +1,4 @@
-export default function Logo({ recolhida = false, fundoEscuro = false }) {
+export default function Logo({ fundoEscuro = false }) {
   const corDaEsquerda = fundoEscuro ? '#8FC1CC' : '#0F4C5C'
   const corDaDireita = fundoEscuro ? '#E58A6F' : '#C8553D'
 
@@ -18,12 +18,10 @@ export default function Logo({ recolhida = false, fundoEscuro = false }) {
           strokeLinecap="round"
         />
       </svg>
-      {!recolhida && (
-        <div>
-          <strong>AMPARA</strong>
-          <span>SOCIAL</span>
-        </div>
-      )}
+      <div>
+        <strong>AMPARA</strong>
+        <span>SOCIAL</span>
+      </div>
     </div>
   )
 }
