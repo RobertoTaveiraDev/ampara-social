@@ -3,8 +3,6 @@ referencias/
 
 Back-End/vendor/
 Back-End/config/autoload/local.php
-Back-End/config/autoload/development.config.php
-Back-End/data/cache/
 
 Front-End/node_modules/
 Front-End/dist/

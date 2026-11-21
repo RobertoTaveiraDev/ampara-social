@@ -34,10 +34,11 @@ Abra o arquivo `Back-End/database/banco.sql` no HeidiSQL e execute. Ele cria o b
 cd Back-End
 cp config/autoload/local.php.dist config/autoload/local.php
 composer install
+composer development-enable
 composer serve
 ```
 
-Preencha no `local.php` a senha do MySQL e a chave do JWT. A API fica em `http://localhost:8080/api`.
+Preencha no `local.php` a senha do MySQL e a chave do JWT. O `development-enable` só precisa ser rodado uma vez: ele desliga o cache de configuração do Laminas durante o desenvolvimento. A API fica em `http://localhost:8080/api`.
 
 ### 3. Front-End
 
