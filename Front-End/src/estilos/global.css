@@ -33,7 +33,8 @@ body {
 }
 button,
 input,
-select {
+select,
+textarea {
   background: transparent;
   color: inherit;
   font: inherit;
@@ -122,8 +123,19 @@ select {
   padding: 0 12px;
   width: 100%;
 }
+textarea {
+  background: #fffefb;
+  border: 1px solid #cec9bf;
+  border-radius: 7px;
+  font-size: 14px;
+  outline: none;
+  padding: 10px 12px;
+  resize: vertical;
+  width: 100%;
+}
 input:focus,
-select:focus {
+select:focus,
+textarea:focus {
   border-color: var(--petrol);
 }
 label {
@@ -327,7 +339,7 @@ td a {
   color: var(--petrol);
   font-weight: 600;
 }
-td.actions {
+.actions {
   display: flex;
   gap: 8px;
   justify-content: flex-end;
@@ -353,6 +365,53 @@ td.actions {
   gap: 10px;
   justify-content: flex-end;
   padding-top: 18px;
+}
+
+.tabs {
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 24px;
+  margin-bottom: 20px;
+}
+.tabs button {
+  border-bottom: 2px solid transparent;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 1px;
+}
+.tabs button.active {
+  border-color: var(--petrol);
+  color: var(--petrol);
+}
+.section-head {
+  align-items: center;
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.section-head + .form-card,
+.registro {
+  margin-bottom: 12px;
+}
+.registro {
+  padding: 16px 20px;
+}
+.registro header {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.registro span {
+  font-size: 12px;
+}
+.registro p {
+  font-size: 13px;
+  white-space: pre-line;
 }
 
 .two-column {
