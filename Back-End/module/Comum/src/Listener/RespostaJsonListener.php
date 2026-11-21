@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Comum\Listener;
 
+use Comum\ErroDeNegocio;
 use Comum\RespostaJson;
 use Laminas\EventManager\AbstractListenerAggregate;
 use Laminas\EventManager\EventManagerInterface;
@@ -44,6 +45,12 @@ class RespostaJsonListener extends AbstractListenerAggregate
 
     public function responderErro(MvcEvent $evento): Response
     {
+        $excecao = $evento->getParam('exception');
+
+        if ($excecao instanceof ErroDeNegocio) {
+            return $this->responder($evento, $excecao->status(), ['mensagem' => $excecao->getMessage()]);
+        }
+
         if ($evento->getError() === Application::ERROR_EXCEPTION) {
             return $this->responder($evento, 500, ['mensagem' => 'Erro interno no servidor']);
         }
