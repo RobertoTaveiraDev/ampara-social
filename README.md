@@ -2,7 +2,7 @@
 
 Atendimento Municipal, Proteção e Acompanhamento da Rede de Assistência.
 
-Sistema que integra as unidades da assistência social do município (CRAS, CREAS e CAPS) em um cadastro único do cidadão, com encaminhamentos entre unidades e sigilo profissional garantido no back-end.
+Sistema que integra as unidades da assistência social do município (CRAS, CREAS e CAPS) em um cadastro único do cidadão. Cada unidade registra os seus atendimentos, e o servidor só enxerga os atendimentos da unidade em que trabalha.
 
 Projeto B2 da disciplina Web Avançada (UniSALESIANO).
 
@@ -55,10 +55,8 @@ Abra o endereço que o Vite mostrar no terminal.
 
 O `banco.sql` cria estes usuários fictícios. Todos usam a senha `ampara123`.
 
-| Usuário | E-mail | Cargo | Lotação |
-|---|---|---|---|
-| Ana Ribeiro | ana.ribeiro@ampara.gov.br | Técnico (assistente social) | CRAS Centro |
-| Marcos Lima | marcos.lima@ampara.gov.br | Técnico (psicólogo) | CAPS II |
-| Juliana Prado | juliana.prado@ampara.gov.br | Coordenador | CREAS Norte |
-| Carlos Mendes | carlos.mendes@ampara.gov.br | Gestor | Gestão Municipal |
-| Admin do Sistema | admin@ampara.gov.br | Administrador | Administração |
+| Usuário | E-mail | Unidade |
+|---|---|---|
+| Ana Ribeiro | ana.ribeiro@ampara.gov.br | CRAS Centro |
+| Marcos Lima | marcos.lima@ampara.gov.br | CAPS II |
+| Juliana Prado | juliana.prado@ampara.gov.br | CREAS Norte |
