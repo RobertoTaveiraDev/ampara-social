@@ -30,7 +30,9 @@
         "psr-4": {
             "Comum\\": "module/Comum/src/",
             "Seguranca\\": "module/Seguranca/src/",
-            "Municipe\\": "module/Municipe/src/"
+            "Municipe\\": "module/Municipe/src/",
+            "Atendimento\\": "module/Atendimento/src/",
+            "Beneficio\\": "module/Beneficio/src/"
         }
     },
     "scripts": {

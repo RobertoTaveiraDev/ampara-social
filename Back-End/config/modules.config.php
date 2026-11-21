@@ -12,4 +12,6 @@ return [
     'Comum',
     'Seguranca',
     'Municipe',
+    'Atendimento',
+    'Beneficio',
 ];
