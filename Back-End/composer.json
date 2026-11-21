@@ -29,7 +29,8 @@
     "autoload": {
         "psr-4": {
             "Comum\\": "module/Comum/src/",
-            "Seguranca\\": "module/Seguranca/src/"
+            "Seguranca\\": "module/Seguranca/src/",
+            "Municipe\\": "module/Municipe/src/"
         }
     },
     "scripts": {
