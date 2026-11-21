@@ -22,4 +22,7 @@ return [
     'cors' => [
         'origem_permitida' => 'http://localhost:5173',
     ],
+    'jwt' => [
+        'validade_em_minutos' => 60,
+    ],
 ];

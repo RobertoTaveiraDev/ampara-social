@@ -17,4 +17,7 @@ return [
         'username' => 'root',
         'password' => '',
     ],
+    'jwt' => [
+        'chave' => 'troque-por-uma-chave-aleatoria-com-pelo-menos-32-caracteres',
+    ],
 ];
