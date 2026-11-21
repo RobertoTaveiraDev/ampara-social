@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Comum\Listener;
 
+use Comum\RespostaJson;
 use Laminas\EventManager\AbstractListenerAggregate;
 use Laminas\EventManager\EventManagerInterface;
 use Laminas\Http\Response;
@@ -32,31 +33,27 @@ class RespostaJsonListener extends AbstractListenerAggregate
             return null;
         }
 
-        if ($evento->getResponse()->getStatusCode() === 405) {
+        $status = $evento->getResponse()->getStatusCode();
+
+        if ($status === 405) {
             $resultado = ['mensagem' => 'Método não permitido'];
         }
 
-        return $this->escreverJson($evento, $resultado);
+        return $this->responder($evento, $status, $resultado);
     }
 
     public function responderErro(MvcEvent $evento): Response
     {
         if ($evento->getError() === Application::ERROR_EXCEPTION) {
-            $evento->getResponse()->setStatusCode(500);
-
-            return $this->escreverJson($evento, ['mensagem' => 'Erro interno no servidor']);
+            return $this->responder($evento, 500, ['mensagem' => 'Erro interno no servidor']);
         }
 
-        $evento->getResponse()->setStatusCode(404);
-
-        return $this->escreverJson($evento, ['mensagem' => 'Recurso não encontrado']);
+        return $this->responder($evento, 404, ['mensagem' => 'Recurso não encontrado']);
     }
 
-    private function escreverJson(MvcEvent $evento, array $conteudo): Response
+    private function responder(MvcEvent $evento, int $status, array $conteudo): Response
     {
-        $resposta = $evento->getResponse();
-        $resposta->getHeaders()->addHeaderLine('Content-Type', 'application/json; charset=utf-8');
-        $resposta->setContent(json_encode($conteudo, JSON_UNESCAPED_UNICODE));
+        $resposta = RespostaJson::escrever($evento->getResponse(), $status, $conteudo);
         $evento->setResult($resposta);
 
         return $resposta;
