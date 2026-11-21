@@ -23,16 +23,6 @@ CREATE TABLE usuarios (
     CONSTRAINT fk_usuarios_unidade FOREIGN KEY (unidade_id) REFERENCES unidades (id)
 ) ENGINE = InnoDB;
 
-CREATE TABLE tentativas_login (
-    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    email VARCHAR(150) NOT NULL,
-    ip VARCHAR(45) NOT NULL,
-    sucesso TINYINT(1) NOT NULL,
-    data_hora DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    KEY ix_tentativas_email_data (email, data_hora),
-    KEY ix_tentativas_ip_data (ip, data_hora)
-) ENGINE = InnoDB;
-
 CREATE TABLE familias (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     endereco VARCHAR(150) NOT NULL,
