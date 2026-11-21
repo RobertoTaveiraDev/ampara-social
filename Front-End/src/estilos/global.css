@@ -192,9 +192,9 @@ label {
   color: #a9c3c9;
 }
 .login-story h1 {
-  font-size: clamp(36px, 4vw, 58px);
-  line-height: 1.05;
-  max-width: 520px;
+  font-size: clamp(44px, 5.6vw, 92px);
+  line-height: 1.02;
+  max-width: 760px;
 }
 .login-panel {
   align-items: center;
