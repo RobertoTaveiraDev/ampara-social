@@ -57,9 +57,7 @@ class MunicipeService
         $cadastro = $this->validar($dados, null);
 
         return $this->emTransacao(function () use ($cadastro): int {
-            $municipeId = $this->municipes->inserir(
-                ['familia_id' => $this->familiaDoCadastro($cadastro)] + $cadastro['municipe']
-            );
+            $municipeId = $this->municipes->inserir($cadastro['municipe']);
             $this->dadosSocioeconomicos->inserir($municipeId, $cadastro['socioeconomico']);
 
             return $municipeId;
@@ -72,10 +70,7 @@ class MunicipeService
         $cadastro = $this->validar($dados, $id);
 
         $this->emTransacao(function () use ($id, $cadastro): void {
-            $this->municipes->atualizar(
-                $id,
-                ['familia_id' => $this->familiaDoCadastro($cadastro)] + $cadastro['municipe']
-            );
+            $this->municipes->atualizar($id, $cadastro['municipe']);
             $this->dadosSocioeconomicos->atualizar($id, $cadastro['socioeconomico']);
         });
     }
@@ -111,7 +106,7 @@ class MunicipeService
         $nis = $this->somenteDigitos((string) ($dados['nis'] ?? ''));
         $dataNascimento = (string) ($dados['dataNascimento'] ?? '');
         $telefone = Validador::telefoneOpcional($dados['telefone'] ?? '');
-        $familiaId = isset($dados['familiaId']) ? (int) $dados['familiaId'] : null;
+        $familiaId = (int) ($dados['familiaId'] ?? 0);
         $rendaMensal = $dados['rendaMensal'] ?? 0;
 
         if (!$this->cpfValido($cpf)) {
@@ -129,21 +124,8 @@ class MunicipeService
         $this->exigirOpcao($dados['sexo'] ?? null, self::SEXOS, 'Selecione o sexo');
         $this->exigirOpcao($dados['parentesco'] ?? null, self::PARENTESCOS, 'Selecione o parentesco');
 
-        $familia = ['id' => $familiaId, 'telefone' => $telefone];
-
-        if ($familiaId === null) {
-            $familia['endereco'] = Validador::textoObrigatorio(
-                $dados['endereco'] ?? '',
-                150,
-                'Informe o endereço da família (até 150 caracteres)'
-            );
-            $familia['bairro'] = Validador::textoObrigatorio(
-                $dados['bairro'] ?? '',
-                80,
-                'Informe o bairro da família (até 80 caracteres)'
-            );
-        } elseif (!$this->familias->existe($familiaId)) {
-            throw new ErroDeNegocio('Família não encontrada');
+        if (!$this->familias->existe($familiaId)) {
+            throw new ErroDeNegocio('Selecione a família');
         }
 
         if (!is_numeric($rendaMensal) || $rendaMensal < 0) {
@@ -166,6 +148,7 @@ class MunicipeService
 
         return [
             'municipe' => [
+                'familia_id' => $familiaId,
                 'nome' => $nome,
                 'cpf' => $cpf,
                 'nis' => $nis === '' ? null : $nis,
@@ -174,7 +157,6 @@ class MunicipeService
                 'parentesco' => $dados['parentesco'],
                 'telefone' => $telefone,
             ],
-            'familia' => $familia,
             'socioeconomico' => [
                 'renda_mensal' => (float) $rendaMensal,
                 'escolaridade' => $dados['escolaridade'],
@@ -182,21 +164,6 @@ class MunicipeService
                 'tipo_moradia' => $dados['tipoMoradia'],
             ],
         ];
-    }
-
-    private function familiaDoCadastro(array $cadastro): int
-    {
-        $familia = $cadastro['familia'];
-
-        if ($familia['id'] !== null) {
-            return $familia['id'];
-        }
-
-        return $this->familias->inserir([
-            'endereco' => $familia['endereco'],
-            'bairro' => $familia['bairro'],
-            'telefone' => $familia['telefone'],
-        ]);
     }
 
     private function emTransacao(callable $operacao): mixed

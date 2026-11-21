@@ -24,9 +24,7 @@ const formularioEmBranco = {
   sexo: '',
   telefone: '',
   parentesco: 'Responsável familiar',
-  familiaId: 'nova',
-  endereco: '',
-  bairro: '',
+  familiaId: '',
   rendaMensal: '',
   escolaridade: '',
   ocupacao: '',
@@ -101,7 +99,7 @@ export default function PaginaFormularioMunicipe() {
     const corpo = {
       ...formulario,
       cpf: somenteDigitos(formulario.cpf),
-      familiaId: formulario.familiaId === 'nova' ? null : Number(formulario.familiaId),
+      familiaId: Number(formulario.familiaId),
       rendaMensal: Number(formulario.rendaMensal || 0),
     }
 
@@ -168,7 +166,7 @@ export default function PaginaFormularioMunicipe() {
           <label className="span-2">
             Família *
             <select name="familiaId" value={formulario.familiaId} onChange={alterar}>
-              <option value="nova">Nova família</option>
+              <option value="">Selecione</option>
               {familias.map((familia) => (
                 <option key={familia.id} value={familia.id}>
                   {familia.endereco} · {familia.bairro}
@@ -177,18 +175,6 @@ export default function PaginaFormularioMunicipe() {
               ))}
             </select>
           </label>
-          {formulario.familiaId === 'nova' && (
-            <>
-              <label>
-                Endereço *
-                <input name="endereco" value={formulario.endereco} onChange={alterar} maxLength={150} />
-              </label>
-              <label>
-                Bairro *
-                <input name="bairro" value={formulario.bairro} onChange={alterar} maxLength={80} />
-              </label>
-            </>
-          )}
           <label>
             Parentesco *
             <select name="parentesco" value={formulario.parentesco} onChange={alterar}>
