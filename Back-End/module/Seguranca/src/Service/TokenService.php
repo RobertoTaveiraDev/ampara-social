@@ -24,7 +24,6 @@ class TokenService
         return JWT::encode([
             'id' => $usuario->id,
             'nome' => $usuario->nome,
-            'cargo' => $usuario->cargo,
             'unidadeId' => $usuario->unidadeId,
             'iat' => $agora,
             'exp' => $agora + $this->validadeEmMinutos * 60,
@@ -42,7 +41,6 @@ class TokenService
         return [
             'id' => $conteudo->id,
             'nome' => $conteudo->nome,
-            'cargo' => $conteudo->cargo,
             'unidadeId' => $conteudo->unidadeId,
         ];
     }

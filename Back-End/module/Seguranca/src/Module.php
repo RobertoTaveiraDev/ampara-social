@@ -49,9 +49,6 @@ class Module
                 Controller\LoginController::class => fn ($container) => new Controller\LoginController(
                     $container->get(Service\LoginService::class)
                 ),
-                Controller\UsuarioLogadoController::class => fn ($container) => new Controller\UsuarioLogadoController(
-                    $container->get(Model\UsuarioTable::class)
-                ),
             ],
         ];
     }

@@ -19,16 +19,6 @@ return [
                     ],
                 ],
             ],
-            'usuario-logado' => [
-                'type' => Literal::class,
-                'options' => [
-                    'route' => '/api/me',
-                    'defaults' => [
-                        'controller' => Controller\UsuarioLogadoController::class,
-                        'cargos' => ['tecnico', 'coordenador', 'gestor', 'admin'],
-                    ],
-                ],
-            ],
         ],
     ],
     'listeners' => [

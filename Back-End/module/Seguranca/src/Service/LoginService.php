@@ -14,7 +14,7 @@ class LoginService
 
     public function entrar(string $email, string $senha): ?array
     {
-        $usuario = $this->usuarios->buscarAtivoPorEmail($email);
+        $usuario = $this->usuarios->buscarPorEmail($email);
 
         if ($usuario === null || !password_verify($senha, $usuario->senhaHash)) {
             return null;

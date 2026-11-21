@@ -39,12 +39,6 @@ class AutorizacaoListener extends AbstractListenerAggregate
             ]);
         }
 
-        if (!in_array($usuario['cargo'], $rota->getParam('cargos', []), true)) {
-            return RespostaJson::escrever($evento->getResponse(), 403, [
-                'mensagem' => 'Acesso não permitido para o seu perfil',
-            ]);
-        }
-
         $evento->setParam('usuario', $usuario);
 
         return null;
