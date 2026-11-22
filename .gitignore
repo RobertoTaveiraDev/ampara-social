@@ -1,0 +1,14 @@
+CLAUDE.md
+referencias/
+
+Back-End/vendor/
+Back-End/config/autoload/local.php
+
+Front-End/node_modules/
+Front-End/dist/
+Front-End/.env
+
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
